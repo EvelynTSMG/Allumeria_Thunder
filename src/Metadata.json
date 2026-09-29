@@ -1,0 +1,36 @@
+{
+  "$schema": "https://codeberg.org/ignitron/ignitron/raw/branch/master/Metadata.schema.json",
+  "schema_version": 2,
+  "assembly_relative_path": "EvesThunder.dll",
+  "id": "evelyntsmg.EvesThunder",
+  "display_name": "Eve's Thunder",
+  "contributors": [
+    {
+      "name": "EvelynTSMG",
+      "role": "author"
+    }
+  ],
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "id": "allumeria",
+      "version": ">=0.15.11"
+    },
+    {
+      "id": "aluminium",
+      "version": ">=0.2.0"
+    },
+    {
+      "id": "ignitron",
+      "version": "0.8.*"
+    },
+    {
+      "id": "harmony",
+      "version": "2.*"
+    }
+  ],
+  "environment": "client_server",
+  "entrypoints": [
+    "EvesThunder.EvesThunderMod"
+  ]
+}

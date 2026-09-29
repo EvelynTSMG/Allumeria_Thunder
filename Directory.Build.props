@@ -1,0 +1,14 @@
+<Project>
+    <PropertyGroup>
+        <_OutDeployDir Condition="'$(Configuration)'=='Release'">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'artifacts', 'deploy', 'rel'))</_OutDeployDir>
+        <_OutDeployDir Condition="'$(Configuration)'=='Debug'">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'artifacts', 'deploy', 'dbg'))</_OutDeployDir>
+        <_OutObjDir>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'artifacts', 'obj', '$(MSBuildProjectName)'))</_OutObjDir>
+        <_OutBuildDir>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'artifacts', 'build', '$(MSBuildProjectName)'))</_OutBuildDir>
+
+        <BaseOutputPath>$(_OutBuildDir)</BaseOutputPath>
+        <BaseIntermediateOutputPath>$(_OutObjDir)</BaseIntermediateOutputPath>
+        <PublishDir>$(_OutDeployDir)</PublishDir>
+
+        <DebugType>portable</DebugType>
+    </PropertyGroup>
+</Project>
