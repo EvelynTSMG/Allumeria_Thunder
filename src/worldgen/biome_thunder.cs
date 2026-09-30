@@ -9,7 +9,7 @@ using Allumeria.Items;
 
 using EvesThunder.Effects;
 
-namespace EvesThunder.Biomes;
+namespace EvesThunder.WorldGen;
 
 public class ThunderBiome : WorldBiome {
     public static Atmosphere thunder_atmosphere = new() {
