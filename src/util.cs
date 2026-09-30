@@ -7,15 +7,15 @@ public static class EvesUtils {
 
     public static class Keys {
         internal static string item(string id) {
-            return $"res.ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.items.{id}";
+            return $"ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.items.{id}";
         }
 
         internal static string block(string id) {
-            return $"res.ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.blocks.{id}";
+            return $"ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.blocks.{id}";
         }
 
         internal static string block_items(string id) {
-            return $"res.ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.block_items.{id}";
+            return $"ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.block_items.{id}";
         }
     }
 

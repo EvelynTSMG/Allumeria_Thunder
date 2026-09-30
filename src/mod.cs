@@ -32,7 +32,7 @@ public sealed class EvesThunderMod : IModEntrypoint {
         Harmony harmony = new("evelyntsmg.EvesThunder");
         harmony.PatchAll();
 
-        _assets = AssetManager.CreateDefault(box.RootPath, $"res/ignitron/{MOD_ID}");
+        _assets = AssetManager.CreateDefault(box.RootPath, $"ignitron/{MOD_ID}");
 
         AllumAssetManager.blockAtlas.ScanDirectory(_assets, "textures/atlas/blocks", 16);
         AllumAssetManager.itemAtlas.ScanDirectory(_assets, "textures/atlas/block_items", 16);

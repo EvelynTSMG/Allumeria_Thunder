@@ -2,7 +2,7 @@
     <Target Name="_CopyResources" AfterTargets="Build">
         <PropertyGroup>
             <ResDir>$(ProjectDir)res</ResDir>
-            <ResPublishDir>$(PublishDir)res</ResPublishDir>
+            <ResPublishDir>$(PublishDir)</ResPublishDir>
         </PropertyGroup>
 
         <Message Text="Copying resources..."/>
