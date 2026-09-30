@@ -94,6 +94,11 @@ public static class ItemArranger {
                         category.items.AddAfter(item, after);
                 }
             }
+
+            done = true;
+
+            _add_before.Clear();
+            _add_after.Clear();
         }
     }
 }
