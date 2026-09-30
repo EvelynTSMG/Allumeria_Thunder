@@ -8,6 +8,7 @@ using Ignitron.Aluminium.Registries;
 using Ignitron.Aluminium.Translation;
 
 using EvesThunder.Blocks;
+using EvesThunder.Crafting;
 using EvesThunder.UI;
 
 using Ignitron.Aluminium.Assets.IO;
@@ -48,7 +49,8 @@ public sealed class EvesThunderMod : IModEntrypoint {
         );
 
         ContentRegistryEvents.Blocks += EvesBlocks.init;
-        ContentRegistryEvents.Items  += EvesItems.init;
+        ContentRegistryEvents.Items += EvesItems.init;
+        ContentRegistryEvents.CraftingRecipes += EvesCraftingRecipes.init;
         EvesGuide.init();
 
         Logger.Init("Initialized Eve's Thunder!");
