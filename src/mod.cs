@@ -1,5 +1,3 @@
-using System.Reflection;
-
 using HarmonyLib;
 using HarmonyLib.Tools;
 
@@ -13,6 +11,7 @@ using EvesThunder.Blocks;
 
 using Ignitron.Loader;
 
+using AssetManager = Ignitron.Aluminium.Assets.AssetManager;
 using Logger = Allumeria.Logger;
 
 namespace EvesThunder;
