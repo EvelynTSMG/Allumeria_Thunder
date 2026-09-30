@@ -2,11 +2,11 @@ using Allumeria;
 using Allumeria.Biomes.Generators;
 using Allumeria.ChunkManagement;
 
-using EvesThunder.WorldGen;
+using EvesThunder.World;
 
 using HarmonyLib;
 
-namespace EvesThunder.WorldGen;
+namespace EvesThunder.World;
 
 [HarmonyPatch]
 internal static class GenerateBiomes {
