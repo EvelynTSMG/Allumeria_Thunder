@@ -79,15 +79,7 @@ public static class ItemArranger {
     public static class Item_AssignCategories {
         [HarmonyPostfix]
         private static void Postfix() {
-            ItemCategory[] dirty_categories = [
-                ItemCategory.all,
-                ItemCategory.blocks,
-                ItemCategory.nonblocks,
-                ItemCategory.weapons,
-                ItemCategory.tools,
-            ];
-
-            foreach (ItemCategory category in dirty_categories) {
+            foreach (ItemCategory category in ItemCategory.categories) {
                 foreach (Item item in _add_before.Keys) {
                     Item before = _add_before[item];
 
