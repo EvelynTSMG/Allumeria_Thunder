@@ -2,12 +2,13 @@
     <Target Name="_CopyResources" AfterTargets="Build">
         <PropertyGroup>
             <ResDir>$(ProjectDir)res</ResDir>
+            <ResPublishDir>$(PublishDir)res</ResPublishDir>
         </PropertyGroup>
 
         <Message Text="Copying resources..."/>
 
-        <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -Command &quot;robocopy '$(ResDir)' '$(PublishDir)' /MIR /R:0 /W:0" ContinueOnError="true" IgnoreExitCode="true" />
-        <Exec Condition="'$(OS)' == 'Unix'" Command="rsync -acu --delete '$(ResDir)/' '$(PublishDir)'" ContinueOnError="true" IgnoreExitCode="true" />
+        <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -Command &quot;robocopy '$(ResDir)' '$(ResPublishDir)' /MIR /R:0 /W:0" ContinueOnError="true" IgnoreExitCode="true" />
+        <Exec Condition="'$(OS)' == 'Unix'" Command="rsync -acu --delete '$(ResDir)/' '$(ResPublishDir)'" ContinueOnError="true" IgnoreExitCode="true" />
     </Target>
     <Target Name="__PublishAfterBuild" AfterTargets="Build" DependsOnTargets="Publish" />
 </Project>

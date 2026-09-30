@@ -13,5 +13,7 @@ public static class EvesBlocks {
 
     internal static void init() {
         ItemArranger.add_before(fulminite_shard_block, Block.ice_cap);
+
+        Logger.Info($"Expecting texture called '{fulminite_shard_block.textureStrings[0]}'");
     }
 }
