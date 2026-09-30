@@ -22,9 +22,5 @@ public static class EvesBlocks {
 
     internal static void init() {
         ItemArranger.add_before(fulminite_shard_cluster, Block.ice_cap);
-
-        Logger.Warn("Possibilities:");
-        Logger.Warn($"  '{fulminite_shard_cluster.item.itemTextureString}'");
-        Logger.Warn($"  '{fulminite_shard_cluster.dropItem.itemTextureString}'");
     }
 }

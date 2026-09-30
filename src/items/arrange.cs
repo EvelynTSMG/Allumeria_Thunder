@@ -16,7 +16,6 @@ public static class ItemArranger {
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
         _add_before.Add(item, before);
-        Logger.Info($"Adding '{item.strID}' before '{before.strID}'.");
     }
 
     public static void add_after(Item item, Item after) {
@@ -24,7 +23,6 @@ public static class ItemArranger {
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
         _add_after.Add(item, after);
-        Logger.Info($"Adding '{item.strID}' after '{after.strID}'.");
     }
 
     public static void add_before(Item item, Block before) => add_before(item, before.item);
