@@ -1,4 +1,4 @@
-item.evelyntsmg.EvesThunder.fulminite_shard_block Fulminite Shard Cluster
+item.evelyntsmg.EvesThunder.fulminite_shard_cluster Fulminite Shard Cluster
 item.evelyntsmg.EvesThunder.fulminite_shard Fulminite Shard
 item.evelyntsmg.EvesThunder.fulminite_ingot Fulminite Ingot
 

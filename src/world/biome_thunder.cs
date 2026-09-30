@@ -56,6 +56,10 @@ public class ThunderBiome : WorldBiome {
         : base(id, name, atmosphere) { }
 
     public override void OnPlayerInsideTick(PlayerEntity player) {
+        if (!player.IsSelf()) return;
+
+        EvesGuide.visit_thunder.MarkComplete();
+
         ItemStack? helmet = player.inventory.inventory.GetItemInSlot(72);
         ItemStack? chest  = player.inventory.inventory.GetItemInSlot(73);
 

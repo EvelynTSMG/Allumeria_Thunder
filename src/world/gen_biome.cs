@@ -24,11 +24,6 @@ internal static class GenerateBiomes {
                 int idx_x = col_idx_x + __instance.posX * 32;
                 int idx_z = col_idx_z + __instance.posZ * 32;
 
-                // if (__instance.biomeMap[col_idx_x, col_idx_z] == GeneratorBiome.desert) {
-                //     found_desert = true;
-                //     __instance.biomeMap[col_idx_x, col_idx_z] = ThunderBiomeGenerator.thunder_gen;
-                // }
-
                 float noise_value = noise.GetNoise(idx_z, idx_x) * 2f;
 
                 Vector2 world_point = new(idx_x, idx_z);

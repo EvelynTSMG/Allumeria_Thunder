@@ -16,7 +16,7 @@ public static class ItemArranger {
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
         _add_before.Add(item, before);
-        Logger.Info($"Adding {item.strID} before {before.strID}");
+        Logger.Info($"Adding '{item.strID}' before '{before.strID}'.");
     }
 
     public static void add_after(Item item, Item after) {
@@ -24,56 +24,19 @@ public static class ItemArranger {
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
         _add_after.Add(item, after);
-        Logger.Info($"Adding {item.strID} after {after.strID}");
+        Logger.Info($"Adding '{item.strID}' after '{after.strID}'.");
     }
 
-    public static void add_before(Item item, Block before) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
+    public static void add_before(Item item, Block before) => add_before(item, before.item);
+    public static void add_after(Item item, Block after)   => add_after (item, after.item);
 
-        _add_before.Add(item, before.item);
-        Logger.Info($"Adding {item.strID} before {before.item.strID}");
-    }
+    public static void add_before(Block block, Item before) => add_before(block.item, before);
+    public static void add_after(Block block, Item after)   => add_after (block.item, after);
 
-    public static void add_after(Item item, Block after) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
+    public static void add_before(Block block, Block before) => add_before(block.item, before.item);
+    public static void add_after(Block block, Block after)   => add_after (block.item, after.item);
 
-        _add_after.Add(item, after.item);
-        Logger.Info($"Adding {item.strID} after {after.item.strID}");
-    }
 
-    public static void add_before(Block block, Item before) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
-
-        _add_before.Add(block.item, before);
-        Logger.Info($"Adding {block.item.strID} before {before.strID}");
-    }
-
-    public static void add_after(Block block, Item after) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
-
-        _add_after.Add(block.item, after);
-        Logger.Info($"Adding {block.item.strID} after {after.strID}");
-    }
-
-    public static void add_before(Block block, Block before) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
-
-        _add_before.Add(block.item, before.item);
-        Logger.Info($"Adding {block.item.strID} before {before.item.strID}");
-    }
-
-    public static void add_after(Block block, Block after) {
-        if (done)
-            throw new NotSupportedException("Cannot add items after item array has been fitted.");
-
-        _add_after.Add(block.item, after.item);
-        Logger.Info($"Adding {block.item.strID} after {after.item.strID}");
-    }
 
     [HarmonyPatch(typeof(Item), nameof(Item.AssignCategories))]
     public static class Item_AssignCategories {
