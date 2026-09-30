@@ -31,4 +31,11 @@ global using Allumeria.Rendering;
 global using Allumeria.Settings;
 global using Allumeria.UI;
 
+global using EvesThunder;
+global using EvesThunder.Blocks;
+global using EvesThunder.Effects;
+global using EvesThunder.Items;
+global using EvesThunder.UI;
+global using EvesThunder.World;
+
 global using static EvesThunder.EvesUtils;

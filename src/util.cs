@@ -35,4 +35,22 @@ internal static class EvesExt {
             return new Vector3(x, y, z);
         }
     }
+
+    public static bool AddBefore<T>(this List<T> list, T item, T before) {
+        int index = list.IndexOf(before);
+        if (index < 0)
+            return false;
+
+        list.Insert(index, item);
+        return true;
+    }
+
+    public static bool AddAfter<T>(this List<T> list, T item, T after) {
+        int index = list.IndexOf(after);
+        if (index < 0)
+            return false;
+
+        list.Insert(index + 1, item);
+        return true;
+    }
 }

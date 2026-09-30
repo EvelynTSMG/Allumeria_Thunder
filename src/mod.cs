@@ -8,6 +8,7 @@ using Ignitron.Aluminium.Registries;
 using Ignitron.Aluminium.Translation;
 
 using EvesThunder.Blocks;
+using EvesThunder.UI;
 
 using Ignitron.Loader;
 
@@ -40,7 +41,9 @@ public sealed class EvesThunderMod : IModEntrypoint {
         // register your base translation keys
         AluminiumRegistries.Translators.Register(box.Metadata.Id, new DefaultTranslator(_assets.Load("translations/keys.txt", TranslationAssetProvider.Default)));
 
-        ContentRegistryEvents.Blocks += EvesThunderBlocks.init;
+        ContentRegistryEvents.Blocks += EvesBlocks.init;
+        ContentRegistryEvents.Items  += EvesItems.init;
+        EvesGuide.init();
 
         Logger.Init("Initialized Eve's Thunder!");
     }

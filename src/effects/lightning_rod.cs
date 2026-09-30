@@ -12,7 +12,7 @@ public sealed class EffectLightningRod : Effect {
     private const float MAX_VELOCITY = 1.6f;
 
     public static readonly ParticleBehaviour particle
-        = new ParticleBehaviour().SetTexture("spark");
+        = new ParticleBehaviour().SetTexture(id("spark"));
 
     public EffectLightningRod(int id, string name)
         : base(id, name, 0, 0, EffectType.Hidden) { }
