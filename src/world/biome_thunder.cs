@@ -2,7 +2,7 @@ using Allumeria.ChunkManagement.TerrainFeatures;
 
 using EvesThunder.Effects;
 
-namespace EvesThunder.World;
+namespace EvesThunder.WorldGen;
 
 public class ThunderBiome : WorldBiome {
     public static Atmosphere thunder_atmosphere = new() {

@@ -1,8 +1,8 @@
 using HarmonyLib;
 
-namespace EvesThunder.World;
+namespace EvesThunder.WorldGen;
 
-[HarmonyPatch]
+// [HarmonyPatch]
 internal static class GenerateBiomes {
     [HarmonyPatch(typeof(ChunkColumn), nameof(ChunkColumn.GenerateData))]
     private static class GenerateDataPatch {

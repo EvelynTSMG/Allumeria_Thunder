@@ -36,6 +36,6 @@ global using EvesThunder.Blocks;
 global using EvesThunder.Effects;
 global using EvesThunder.Items;
 global using EvesThunder.UI;
-global using EvesThunder.World;
+global using EvesThunder.WorldGen;
 
 global using static EvesThunder.EvesUtils;
