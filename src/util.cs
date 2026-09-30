@@ -14,7 +14,7 @@ public static class EvesUtils {
             return $"ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.blocks.{id}";
         }
 
-        internal static string block_items(string id) {
+        internal static string block_item(string id) {
             return $"ignitron.{EvesThunderMod.MOD_ID}.textures.atlas.block_items.{id}";
         }
     }

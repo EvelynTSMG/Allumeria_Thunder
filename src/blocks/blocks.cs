@@ -4,7 +4,7 @@ namespace EvesThunder.Blocks;
 
 public class EveBlock : Block {
     public EveBlock(string name) : base(id(name)) {
-        item.SetItemSprite(Keys.block_items(name));
+        item.SetItemSprite(Keys.block_item(name));
     }
 }
 
@@ -19,7 +19,6 @@ public static class EvesBlocks {
             .SetCategory([ ItemCategory.natural ])
             .SetMaterial(BlockMaterial.glass)
             .SetLightEmission(0, 3, 5);
-
 
     internal static void init() {
         ItemArranger.add_before(fulminite_shard_cluster, Block.ice_cap);
