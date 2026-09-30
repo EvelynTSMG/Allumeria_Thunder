@@ -7,10 +7,11 @@ public static class EvesBlocks {
             .MakeSemiSolid()
             .SetTexture(id(nameof(fulminite_shard_block)))
             .SetDropItem(EvesItems.fulminite_shard)
+            .SetCategory([ ItemCategory.natural ])
             .SetMaterial(BlockMaterial.glass)
             .SetLightEmission(0, 3, 5);
 
     internal static void init() {
-        //ItemArranger.add_before(fulminite_shard_block, Block.cobalt_ore);
+        ItemArranger.add_before(fulminite_shard_block, Block.ice_cap);
     }
 }
