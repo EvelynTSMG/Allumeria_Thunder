@@ -1,15 +1,8 @@
-using Allumeria.Biomes;
-using Allumeria.Biomes.Generators;
-using Allumeria.Blocks.Blocks;
-using Allumeria.Blocks.Fluids;
-using Allumeria.ChunkManagement;
 using Allumeria.ChunkManagement.TerrainFeatures;
-using Allumeria.EntitySystem.Entities;
-using Allumeria.Items;
 
 using EvesThunder.Effects;
 
-namespace EvesThunder.Biomes;
+namespace EvesThunder.World;
 
 public class ThunderBiome : WorldBiome {
     public static Atmosphere thunder_atmosphere = new() {
@@ -66,7 +59,7 @@ public class ThunderBiome : WorldBiome {
         ItemStack? helmet = player.inventory.inventory.GetItemInSlot(72);
         ItemStack? chest  = player.inventory.inventory.GetItemInSlot(73);
 
-        bool has_metal_helmet = helmet is not null && helmet.item.strID switch {
+        bool has_metal_helmet = helmet?.item.strID switch {
             nameof(Item.copper_helmet)    => true,
             nameof(Item.iron_helmet)      => true,
             nameof(Item.silver_helmet)    => true,
@@ -76,7 +69,7 @@ public class ThunderBiome : WorldBiome {
             _ => false,
         };
 
-        bool has_metal_chest = chest is not null && chest.item.strID switch {
+        bool has_metal_chest = chest?.item.strID switch {
             nameof(Item.copper_chestplate)    => true,
             nameof(Item.iron_chestplate)      => true,
             nameof(Item.silver_chestplate)    => true,
@@ -93,7 +86,7 @@ public class ThunderBiome : WorldBiome {
 }
 
 public class ThunderBiomeGenerator : GeneratorBiome {
-    public static ThunderBiomeGenerator thunder_gen =
+    public static readonly ThunderBiomeGenerator thunder_gen =
         new(id(nameof(thunder_gen)));
 
     public ThunderBiomeGenerator(string name) : base(name) {

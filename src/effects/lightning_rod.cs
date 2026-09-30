@@ -1,6 +1,4 @@
-using Allumeria.EntitySystem;
 using Allumeria.EntitySystem.Effects;
-using Allumeria.Particles;
 
 namespace EvesThunder.Effects;
 
