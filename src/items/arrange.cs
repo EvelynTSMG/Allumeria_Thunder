@@ -75,52 +75,6 @@ public static class ItemArranger {
         Logger.Info($"Adding {block.item.strID} after {after.item.strID}");
     }
 
-    [HarmonyPatch(typeof(Item), nameof(Item.FitItemArray))]
-    public static class Item_FitItemArray {
-        [HarmonyPrefix]
-        private static void Prefix() {
-            List<Item> items = [ ..Item.items ];
-
-            items.RemoveAll(item => _remove.Contains(item));
-
-            foreach (Item before in _add_before.Keys) {
-                Item item = _add_before[before];
-
-                // First remove the item to avoid duplicates.
-                // This fails silently if the item is not already in the array.
-                items.Remove(item);
-
-                if (!items.AddBefore(item, before)) {
-                    Logger.Warn($"Tried to add item {item.strID} before {before.strID}, but {before.strID} is not in item array.");
-                }
-            }
-
-            foreach (Item after in _add_after.Keys) {
-                Item item = _add_after[after];
-
-                // First remove the item to avoid duplicates.
-                // This fails silently if the item is not already in the array.
-                items.Remove(item);
-
-                if (!items.AddAfter(item, after)) {
-                    Logger.Warn($"Tried to add item {item.strID} after {after.strID}, but {after.strID} is not in item array.");
-                }
-            }
-
-            Item.items = [ ..items ];
-
-            done = true;
-        }
-
-        [HarmonyPostfix]
-        private static void Postfix() {
-            // Now that we've gone and changed the array, the IDs are all wrong!
-            for (int i = 0; i < Item.items.Length; i++) {
-                Item.items[i].itemID = i;
-            }
-        }
-    }
-
     [HarmonyPatch(typeof(Item), nameof(Item.AssignCategories))]
     public static class Item_AssignCategories {
         [HarmonyPostfix]
