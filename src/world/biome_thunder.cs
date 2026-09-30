@@ -60,32 +60,32 @@ public class ThunderBiome : WorldBiome {
 
         EvesGuide.visit_thunder.MarkComplete();
 
-        ItemStack? helmet = player.inventory.inventory.GetItemInSlot(72);
-        ItemStack? chest  = player.inventory.inventory.GetItemInSlot(73);
-
-        bool has_metal_helmet = helmet is not null && helmet.item.strID switch {
-            nameof(Item.copper_helmet)    => true,
-            nameof(Item.iron_helmet)      => true,
-            nameof(Item.silver_helmet)    => true,
-            nameof(Item.gold_helmet)      => true,
-            nameof(Item.cobalt_helmet)    => true,
-            nameof(Item.palladium_helmet) => true,
-            _ => false,
-        };
-
-        bool has_metal_chest = chest is not null && chest.item.strID switch {
-            nameof(Item.copper_chestplate)    => true,
-            nameof(Item.iron_chestplate)      => true,
-            nameof(Item.silver_chestplate)    => true,
-            nameof(Item.gold_chestplate)      => true,
-            nameof(Item.cobalt_chestplate)    => true,
-            nameof(Item.palladium_chestplate) => true,
-            _ => false,
-        };
-
-        if (!has_metal_helmet && !has_metal_chest) return;
-
-        player.effects.effectManager.TryAddEffect(EffectLightningRod.lightning_rod, 5);
+        // ItemStack? helmet = player.inventory.inventory.GetItemInSlot(72);
+        // ItemStack? chest  = player.inventory.inventory.GetItemInSlot(73);
+        //
+        // bool has_metal_helmet = helmet is not null && helmet.item.strID switch {
+        //     nameof(Item.copper_helmet)    => true,
+        //     nameof(Item.iron_helmet)      => true,
+        //     nameof(Item.silver_helmet)    => true,
+        //     nameof(Item.gold_helmet)      => true,
+        //     nameof(Item.cobalt_helmet)    => true,
+        //     nameof(Item.palladium_helmet) => true,
+        //     _ => false,
+        // };
+        //
+        // bool has_metal_chest = chest is not null && chest.item.strID switch {
+        //     nameof(Item.copper_chestplate)    => true,
+        //     nameof(Item.iron_chestplate)      => true,
+        //     nameof(Item.silver_chestplate)    => true,
+        //     nameof(Item.gold_chestplate)      => true,
+        //     nameof(Item.cobalt_chestplate)    => true,
+        //     nameof(Item.palladium_chestplate) => true,
+        //     _ => false,
+        // };
+        //
+        // if (!has_metal_helmet && !has_metal_chest) return;
+        //
+        // player.effects.effectManager.TryAddEffect(EffectLightningRod.lightning_rod, 5);
     }
 }
 
