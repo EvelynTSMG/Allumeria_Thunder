@@ -22,11 +22,11 @@ public class EvesGuide {
                 .AddPrerequisite(GuideTask.silver_armour);
 
         get_fulminite_shard =
-            new GuideTask(id(nameof(get_fulminite_shard)), 15, -8, EvesBlocks.fulminite_shard_block.item)
+            new GuideTask(id(nameof(get_fulminite_shard)), 15, -8, EvesItems.fulminite_shard)
                 .AddPrerequisite(visit_thunder);
 
         get_fulminite_ingot =
-            new GuideTask(id(nameof(get_fulminite_ingot)), 15, -11, Item.copper_ingot)
+            new GuideTask(id(nameof(get_fulminite_ingot)), 15, -11, EvesItems.fulminite_ingot)
                 .AddPrerequisite(get_fulminite_shard);
     }
 
