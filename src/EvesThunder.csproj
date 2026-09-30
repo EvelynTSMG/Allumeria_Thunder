@@ -21,11 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="features\" />
-      <Folder Include="res\ignitron\evelyntsmg.EvesThunder\textures\atlas\items\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="res\ignitron\evelyntsmg.EvesThunder\textures\atlas\items\talking_block.png" />
       <None Remove="Properties\launchSettings.json" />
     </ItemGroup>
