@@ -14,7 +14,7 @@ public static class EvesBlocks {
             .MakeNeedSupport()
             .MakeSemiSolid()
             .SetTexture(Keys.block(nameof(fulminite_shard_cluster)))
-            .SetBlockModel(BlockModelQuads.small_plant)
+            .SetBlockModel(EvesBlockModels.fulminite_crystal)
             .SetDropItem(EvesItems.fulminite_shard)
             .SetCategory([ ItemCategory.natural ])
             .SetMaterial(BlockMaterial.glass)
