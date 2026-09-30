@@ -15,7 +15,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_before.Add(before, item);
+        _add_before.Add(item, before);
         Logger.Info($"Adding {item.strID} before {before.strID}");
     }
 
@@ -23,7 +23,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_after.Add(after, item);
+        _add_after.Add(item, after);
         Logger.Info($"Adding {item.strID} after {after.strID}");
     }
 
@@ -31,7 +31,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_before.Add(before.item, item);
+        _add_before.Add(item, before.item);
         Logger.Info($"Adding {item.strID} before {before.item.strID}");
     }
 
@@ -39,7 +39,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_after.Add(after.item, item);
+        _add_after.Add(item, after.item);
         Logger.Info($"Adding {item.strID} after {after.item.strID}");
     }
 
@@ -47,7 +47,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_before.Add(before, block.item);
+        _add_before.Add(block.item, before);
         Logger.Info($"Adding {block.item.strID} before {before.strID}");
     }
 
@@ -55,7 +55,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_after.Add(after, block.item);
+        _add_after.Add(block.item, after);
         Logger.Info($"Adding {block.item.strID} after {after.strID}");
     }
 
@@ -63,7 +63,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_before.Add(before.item, block.item);
+        _add_before.Add(block.item, before.item);
         Logger.Info($"Adding {block.item.strID} before {before.item.strID}");
     }
 
@@ -71,7 +71,7 @@ public static class ItemArranger {
         if (done)
             throw new NotSupportedException("Cannot add items after item array has been fitted.");
 
-        _add_after.Add(after.item, block.item);
+        _add_after.Add(block.item, after.item);
         Logger.Info($"Adding {block.item.strID} after {after.item.strID}");
     }
 
@@ -88,15 +88,15 @@ public static class ItemArranger {
             ];
 
             foreach (ItemCategory category in dirty_categories) {
-                foreach (Item before in _add_before.Keys) {
-                    Item item = _add_before[before];
+                foreach (Item item in _add_before.Keys) {
+                    Item before = _add_before[item];
 
                     if (category.items.Remove(item))
                         category.items.AddBefore(item, before);
                 }
 
-                foreach (Item after in _add_after.Keys) {
-                    Item item = _add_after[after];
+                foreach (Item item in _add_after.Keys) {
+                    Item after = _add_after[item];
 
                     if (category.items.Remove(item))
                         category.items.AddAfter(item, after);
