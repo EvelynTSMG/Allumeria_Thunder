@@ -4,7 +4,7 @@ item.evelyntsmg.EvesThunder.fulminite_ingot Fulminite Ingot
 
 
 guide.evelyntsmg.EvesThunder.visit_thunder.name To the Storm Fields
-guide.evelyntsmg.EvesThunder.visit_thunder.desc The Storm Fields offer a wealth of resources, but wearing metal armor is not a good idea.
+guide.evelyntsmg.EvesThunder.visit_thunder.desc The Storm Fields offer a wealth of resources, but rend asunder those wearing metal armor.
 
 guide.evelyntsmg.EvesThunder.get_fulminite_shard.name Fulminite Shard
 guide.evelyntsmg.EvesThunder.get_fulminite_shard.desc These are abundant just under the surface of the Storm Fields, but need to be refined before use.
