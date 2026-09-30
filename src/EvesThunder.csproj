@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Ignitron.Mod.Sdk/0.8.12">
-
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <RootNamespace>EvesThunder</RootNamespace>
@@ -18,10 +17,5 @@
       <Reference Include="Allumeria">
         <HintPath>\beeg\Games\Launchers\Steam\steamapps\common\Allumeria\Allumeria.dll</HintPath>
       </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="res\ignitron\evelyntsmg.EvesThunder\textures\atlas\items\talking_block.png" />
-      <None Remove="Properties\launchSettings.json" />
     </ItemGroup>
 </Project>
