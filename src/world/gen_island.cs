@@ -24,6 +24,7 @@ internal class IslandChunkColumn : ChunkColumn {
     public void GenerateData(
         World world,
         FastNoiseLite noise,
+        NoiseBlender noise_blender,
         bool super_flat,
         bool void_world,
         bool forest_only
@@ -57,52 +58,96 @@ internal class IslandChunkColumn : ChunkColumn {
 
         seaLevel = 95;
 
+        Vector2i[] biome_points = new Vector2i[4];
+        const double DEGREES = 360.0;
+        const float TWO_PI = MathF.PI * 2f;
+        for (int index = 0; index < biome_points.Length; ++index) {
+            float t = index / (float)biome_points.Length;
+
+            biome_points[index] = new Vector2i(
+                (int)(MathF.Sin(TWO_PI * t) * DEGREES),
+                (int)(MathF.Cos(TWO_PI * t) * DEGREES)
+            );
+        }
+
+        GeneratorBiome[] biome_generators = [
+            GeneratorBiome.desert,
+            GeneratorBiome.beach,
+            GeneratorBiome.snow,
+            ThunderBiomeGenerator.thunder_gen,
+        ];
+
+        NoiseBlender biome_blend = noise_blender.CreateCopy();
+
         for (int cx = 0; cx < 32; cx++)
         for (int cz = 0; cz < 32; cz++) {
             int x = cx * posX * 32;
             int z = cz * posZ * 32;
 
-            float noise_value = noise.GetNoise(z, x) * 2f;
+            biome_blend.SampleNoiseXZ(x, 0, z, noise);
 
-            float left_edge = world.worldLength * 0.3f;
-            float right_edge = world.worldLength - left_edge;
+            float biome_nv = biome_blend.GetBlendedThreshold(x, 0, z, noise) * 2f;
 
-            // left_edge  += noise_value * 10f;
-            // right_edge += noise_value * 10f;
+            // float left_edge = world.worldLength * 0.3f;
+            // float right_edge = world.worldLength - left_edge;
 
-            if (0 > 485.0 + noise_value * 4f) {
-                biomeMap[cx, cz] = GeneratorBiome.beach;
-                continue;
+            // left_edge  += biome_nv * 10f;
+            // right_edge += biome_nv * 10f;
+
+            // if (0 > 485.0 + biome_nv * 4f) {
+            //     biomeMap[cx, cz] = GeneratorBiome.beach;
+            //     continue;
+            // }
+
+            if (!forest_only) {
+                for (int biome_idx = 0; biome_idx < 4; biome_idx++) {
+                    Vector2 biome_center = biome_points[biome_idx];
+                    Vector2 pos = new(x, z);
+                    const float BIOME_SIZE = 200.0f;
+
+                    float dist_to_biome = Vector2.Distance(biome_center, pos);
+                    bool in_biome = dist_to_biome < BIOME_SIZE + biome_nv * 10f;
+
+                    if (!in_biome) continue;
+
+                    biomeMap[cx, cz] = biome_generators[biome_idx];
+                    break;
+                }
             }
 
-            if (!forest_only && x < left_edge) {
-                biomeMap[cx, cz] = GeneratorBiome.snow;
-                continue;
-            }
-
-            if (!forest_only && x > right_edge) {
-                biomeMap[cx, cz] = GeneratorBiome.desert;
-                continue;
-            }
 
             noise.SetFrequency(0.005f);
-            float forest_nv1 = noise.GetNoise(x + 2000, z + 1232) * 4f;
-            float forest_nv2 = noise.GetNoise(x - 3812, z + 5383) * 4f;
+            float forest_nv1 = biome_blend.GetBlendedThreshold(x + 2000, 0, z + 1232, noise) * 4f;
+            float forest_nv2 = biome_blend.GetBlendedThreshold(x - 3812, 0, z + 5383, noise) * 4f;
             biomeMap[cx, cz] =
-                forest_nv1 <= 0.0 || forest_nv2 <= 0.0
-                    ? forest_nv1 >= 0.0 || forest_nv2 <= 0.0
-                        ? GeneratorBiome.forest
-                        : GeneratorBiome.dry_forest
-                    : GeneratorBiome.lush_forest;
+                forest_nv1 <= 0.0// || forest_nv2 <= 0.0
+                    ? GeneratorBiome.forest
+                    : GeneratorBiome.desert;
+                    // ? forest_nv1 >= 0.0 || forest_nv2 <= 0.0
+                        // : GeneratorBiome.dry_forest
         }
 
     }
 }
 
 internal class IslandWorld : World {
+    public static readonly NoiseBlender terrain_noise =
+        new NoiseBlendTwoWay(0.03f, 13041f, -5831f, 0.3f, -0.4f)
+            .AddEntry(
+                new NoiseBlendTwoWay(0.04f, 32485f, -249f, 0.6f, -0.2f)
+                    .AddEntry(new NoiseBlendOneWay(EvesNoiseProfiles.iceberg))
+                    .AddEntry(new NoiseBlendOneWay(NoiseProfile.rolling_hills))
+            )
+            .AddEntry(
+                new NoiseBlendTwoWay(0.03f, 20350f, 3517f, 1.4f, -0.4f)
+                    .AddEntry(new NoiseBlendOneWay(EvesNoiseProfiles.mountainous))
+                    .AddEntry(new NoiseBlendOneWay(NoiseProfile.rolling_hills))
+            );
+
+
     public static readonly NoiseBlender biome_noise =
         new NoiseBlendTwoWay(0.03f, 32485f, -249f, 1f, 0.0f)
-            .AddEntry(new NoiseBlendOneWay(NoiseProfile.large_overhangs))
+            .AddEntry(new NoiseBlendOneWay(NoiseProfile.rolling_hills))
             .AddEntry(new NoiseBlendOneWay(NoiseProfile.rolling_hills));
 
     public IslandWorld(int width = 32, int length = 32, int height = 8)
@@ -112,34 +157,34 @@ internal class IslandWorld : World {
         for (int x = -worldWidth  / 2; x < worldWidth  / 2; x++)
         for (int z = -worldLength / 2; z < worldLength / 2; z++) {
             IslandChunkColumn column = new(x, z);
-            column.GenerateData(this, noise, ignoreFeatures, voidWorld, forestOnly);
+            column.GenerateData(this, noise, biome_noise, ignoreFeatures, voidWorld, forestOnly);
             chunkManager.columns.Add(new Vector2i(x, z), column);
         }
     }
 
     private void generate_terrain() {
-        Parallel.For(-worldWidth / 2, worldWidth / 2, x =>
-        Parallel.For(-worldLength / 2, worldLength / 2, z => {
+        for (int x = -worldWidth / 2; x < worldWidth / 2; x++)
+        for (int z = -worldWidth / 2; z < worldWidth / 2; z++) {
             Vector2i pos = new(x, z);
             if (!chunkManager.columns.TryGetValue(pos, out ChunkColumn? column)) {
                 return;
             }
 
-            Parallel.For(0, worldHeight, y => {
+            for (int y = 0; y < worldHeight; y++) {
                 chunkManager.RequestChunk(x, y, z)
                     .Generate(
                         column,
                         chunkManager.lightEngine,
                         new FastNoiseLite(worldSeed),
-                        worldNoiseType,
+                        terrain_noise,
                         ignoreFeatures,
                         worldSeed
                     );
 
                 ++worldGenProgress;
                 ++generatedChunksComplete;
-            });
-        }));
+            }
+        }
     }
 
     private void generate_soil() {
@@ -289,9 +334,6 @@ internal class IslandWorld : World {
             generate_soil
         );
 
-        ignoreFeatures = true;
-        saveOnGenerate = false;
-
         if (voidWorld) {
             TerrainFeatureOld.GenerateCube(chunkManager, -2, 96, -2, 5, 1, 5, Block.glass);
             ignoreFeatures = true;
@@ -310,17 +352,17 @@ internal class IslandWorld : World {
                 generate_features
             );
 
-            perform_worldgen_step(
-                "Building Structures",
-                "Generating Structures",
-                generate_structures
-            );
-
-            perform_worldgen_step(
-                "Assembling Dungeons",
-                "Generating Dungeons",
-                generate_dungeons
-            );
+            // perform_worldgen_step(
+            //     "Building Structures",
+            //     "Generating Structures",
+            //     generate_structures
+            // );
+            //
+            // perform_worldgen_step(
+            //     "Assembling Dungeons",
+            //     "Generating Dungeons",
+            //     generate_dungeons
+            // );
         }
 
         perform_worldgen_step(
